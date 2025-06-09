@@ -12,6 +12,10 @@ import mpmath.libmp as mlib
 __all__ = [
     'hbar',
     'HBar',
+    'bohr_radius',
+    'BohrRadius',
+    'e',
+    'ElementaryCharge'
 ]
 
 
@@ -57,3 +61,53 @@ class HBar(NumberSymbol, metaclass=Singleton):
 
 # Create an instance for everyone to use.
 hbar = HBar()
+
+class BohrRadius(NumberSymbol, metaclass=Singleton):
+    is_real = True
+    is_positive = True
+    is_negative = False
+    is_irrational = True
+
+    __slots__ = ()
+
+    def _as_mpf_val(self, prec):
+        return mlib.from_float(5.29177210903e-11, prec)
+
+    def _sympyrepr(self, printer, *args):
+        return 'BohrRadius()'
+
+    def _sympystr(self, printer, *args):
+        return 'a_0'
+
+    def _pretty(self, printer, *args):
+        return prettyForm('a_0')
+
+    def _latex(self, printer, *args):
+        return r'a_0'
+
+bohr_radius = BohrRadius()
+
+class ElementaryCharge(NumberSymbol, metaclass=Singleton):
+    is_real = True
+    is_positive = True
+    is_negative = False
+    is_irrational = True
+
+    __slots__ = ()
+
+    def _as_mpf_val(self, prec):
+        return mlib.from_float(1.602176634e-19, prec)
+
+    def _sympyrepr(self, printer, *args):
+        return 'ElementaryCharge()'
+
+    def _sympystr(self, printer, *args):
+        return 'e'
+
+    def _pretty(self, printer, *args):
+        return prettyForm('e')
+
+    def _latex(self, printer, *args):
+        return r'e'
+
+e = ElementaryCharge()
